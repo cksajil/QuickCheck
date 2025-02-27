@@ -1,11 +1,14 @@
 body {
     background-color: #f8f9fa;
-    font-family: Arial, sans-serif;
+}
+
+.navbar-brand {
+    font-weight: bold;
 }
 
 .container {
-    max-width: 400px;
-    margin: 80px auto;
+    max-width: 600px;
+    margin: 50px auto;
     padding: 20px;
     background: white;
     border-radius: 8px;
@@ -13,30 +16,5 @@ body {
 }
 
 h2 {
-    text-align: center;
     margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.btn-block {
-    width: 100%;
-}
-
-.alert {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-a {
-    display: block;
-    text-align: center;
-    margin-top: 10px;
-    color: #007bff;
-}
-
-a:hover {
-    text-decoration: none;
 }

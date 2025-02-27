@@ -95,7 +95,7 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             flash("Login successful!", "success")
-            return redirect(url_for("welcome"))
+            return redirect(url_for("dashboard"))  # Redirect to dashboard
         flash("Invalid username or password.", "danger")
     return render_template("login.html", form=form)
 
@@ -104,6 +104,12 @@ def login():
 @login_required
 def welcome():
     return render_template("welcome.html", username=current_user.username)
+
+
+@app.route("/dashboard")
+@login_required
+def dashboard():
+    return render_template("dashboard.html", username=current_user.username)
 
 
 @app.route("/logout")

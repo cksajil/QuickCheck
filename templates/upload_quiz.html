@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Upload Quiz</h1>
+<form method="POST" action="{{ url_for('upload_quiz') }}" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.file.label }}<br>
+        {{ form.file(class="form-control-file") }}<br>
+        {% if form.file.errors %}
+        <div class="alert alert-danger">
+            {% for error in form.file.errors %}
+            {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+<a href="{{ url_for('home') }}" class="btn btn-secondary">Back to Home</a>
+
+<h3 class="mt-4">CSV File Format</h3>
+<p>Your CSV file must follow this format:</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>title</th>
+            <th>description</th>
+            <th>text</th>
+            <th>option1</th>
+            <th>option2</th>
+            <th>option3</th>
+            <th>option4</th>
+            <th>correct_option</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Sample Quiz</td>
+            <td>This is a sample quiz</td>
+            <td>What is the capital of France?</td>
+            <td>Paris</td>
+            <td>London</td>
+            <td>Berlin</td>
+            <td>Madrid</td>
+            <td>Paris</td>
+        </tr>
+        <tr>
+            <td>Sample Quiz</td>
+            <td>This is a sample quiz</td>
+            <td>What is 2 + 2?</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>4</td>
+        </tr>
+    </tbody>
+</table>
+<p>Download a <a href="{{ url_for('static', filename='sample_quiz.csv') }}" download>sample CSV file</a>.</p>
+{% endblock %}

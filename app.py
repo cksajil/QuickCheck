@@ -3,10 +3,12 @@ from flask_socketio import SocketIO
 from werkzeug.utils import secure_filename
 from forms import CreateQuizForm, UploadQuizForm
 import pandas as pd
+from flask_socketio import SocketIO, emit, join_room, leave_room
 from extensions import db  # Import db from extensions.py
 from models import Quiz, Question, User  # Now this import works
 from dotenv import load_dotenv
 import os
+from flask import send_from_directory
 
 
 load_dotenv()
@@ -40,6 +42,11 @@ def allowed_file(filename):
 @app.route("/")
 def home():
     return render_template("index.html")
+
+
+@app.route("/static/<filename>")
+def download_file(filename):
+    return send_from_directory("static", filename)
 
 
 @app.route("/create_quiz", methods=["GET", "POST"])

@@ -1,0 +1,146 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Create Quiz</h1>
+<form method="POST" action="{{ url_for('create_quiz') }}">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.title.label }}<br>
+        {{ form.title(class="form-control") }}<br>
+        {% if form.title.errors %}
+        <div class="alert alert-danger">
+            {% for error in form.title.errors %}
+            {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="form-group">
+        {{ form.description.label }}<br>
+        {{ form.description(class="form-control") }}<br>
+        {% if form.description.errors %}
+        <div class="alert alert-danger">
+            {% for error in form.description.errors %}
+            {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div id="questions">
+        {% for question in form.questions %}
+        <div class="question">
+            <h3>Question {{ loop.index }}</h3>
+            <div class="form-group">
+                {{ question.text.label }}<br>
+                {{ question.text(class="form-control") }}<br>
+                {% if question.text.errors %}
+                <div class="alert alert-danger">
+                    {% for error in question.text.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ question.option1.label }}<br>
+                {{ question.option1(class="form-control") }}<br>
+                {% if question.option1.errors %}
+                <div class="alert alert-danger">
+                    {% for error in question.option1.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ question.option2.label }}<br>
+                {{ question.option2(class="form-control") }}<br>
+                {% if question.option2.errors %}
+                <div class="alert alert-danger">
+                    {% for error in question.option2.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ question.option3.label }}<br>
+                {{ question.option3(class="form-control") }}<br>
+                {% if question.option3.errors %}
+                <div class="alert alert-danger">
+                    {% for error in question.option3.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ question.option4.label }}<br>
+                {{ question.option4(class="form-control") }}<br>
+                {% if question.option4.errors %}
+                <div class="alert alert-danger">
+                    {% for error in question.option4.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ question.correct_option.label }}<br>
+                {{ question.correct_option(class="form-control") }}<br>
+                {% if question.correct_option.errors %}
+                <div class="alert alert-danger">
+                    {% for error in question.correct_option.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <button type="button" id="add-question" class="btn btn-secondary">Add Question</button>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+
+<script>
+    // JavaScript to dynamically add more questions
+    document.getElementById('add-question').addEventListener('click', function () {
+        const questionsDiv = document.getElementById('questions');
+        const questionCount = document.querySelectorAll('.question').length;
+
+        const newQuestion = `
+                <div class="question">
+                    <h3>Question ${questionCount + 1}</h3>
+                    <div class="form-group">
+                        <label for="questions-${questionCount}-text">Question Text</label><br>
+                        <input class="form-control" id="questions-${questionCount}-text" name="questions-${questionCount}-text" type="text" value=""><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="questions-${questionCount}-option1">Option 1</label><br>
+                        <input class="form-control" id="questions-${questionCount}-option1" name="questions-${questionCount}-option1" type="text" value=""><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="questions-${questionCount}-option2">Option 2</label><br>
+                        <input class="form-control" id="questions-${questionCount}-option2" name="questions-${questionCount}-option2" type="text" value=""><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="questions-${questionCount}-option3">Option 3</label><br>
+                        <input class="form-control" id="questions-${questionCount}-option3" name="questions-${questionCount}-option3" type="text" value=""><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="questions-${questionCount}-option4">Option 4</label><br>
+                        <input class="form-control" id="questions-${questionCount}-option4" name="questions-${questionCount}-option4" type="text" value=""><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="questions-${questionCount}-correct_option">Correct Option</label><br>
+                        <input class="form-control" id="questions-${questionCount}-correct_option" name="questions-${questionCount}-correct_option" type="text" value=""><br>
+                    </div>
+                </div>
+            `;
+
+        questionsDiv.insertAdjacentHTML('beforeend', newQuestion);
+    });
+</script>
+{% endblock %}

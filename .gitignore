@@ -2,6 +2,6 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-instance/database.db
+instance/
 *.db
 .venv/

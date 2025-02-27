@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Welcome to Quiz App</h1>
+<a href="{{ url_for('create_quiz') }}" class="btn btn-primary">Create Quiz</a>
+<a href="{{ url_for('upload_quiz') }}" class="btn btn-secondary">Upload Quiz</a>
+<form action="{{ url_for('join_quiz') }}" method="POST" class="mt-4">
+    <div class="form-group">
+        <label for="quiz_code">Quiz Code:</label>
+        <input type="text" id="quiz_code" name="quiz_code" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">Join Quiz</button>
+</form>
+{% endblock %}
